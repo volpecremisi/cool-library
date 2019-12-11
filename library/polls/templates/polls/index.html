@@ -1,0 +1,11 @@
+{% load static %}
+
+{% if book_lists %}
+    <ul>
+    {% for book in book_lists %}
+        <li>{{ book.title }} : {{ book.author }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
