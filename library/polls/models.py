@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -7,21 +8,20 @@ class Book(models.Model):
     author = models.CharField(max_length=400)
 
     def __str__(self):
-        return " : ".join([self.title,self.author])
+        return " written by ".join([self.title,self.author])
+
+    def __eq__(self, other):
+        return self.title == other.title and self.author == other.author
 
 
-'''
-# Qui ci vorrebbe una tebella?
-class Loans(models.Model):
+class Loan(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     date_of_loan = models.DateTimeField('Date of Loan')
 
-class Person(models.Model):
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
-    mail = models.CharField(max_length=200)
-
     def __str__(self):
-        return " ,".join([self.name,self.surname,self.mail])
-'''
+        message = "\n is on loan to ".join([str(self.book),str(self.person)])
+        return "\n from: ".join([message,str(self.date_of_loan)])
+
+    def __eq__(self, other):
+        return self.book == other.book and self.person == other.person

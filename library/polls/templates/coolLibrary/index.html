@@ -1,0 +1,12 @@
+<h1>The Cool Library</h1>
+<p>Benvenuto {{ user }}!</p>
+
+{% if book_lists %}
+    <ul>
+    {% for book in book_lists %}
+        <li><a href="{% url 'coolLibrary:checkLogin' book.id %}">{{ book.title }} : {{ book.author }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
