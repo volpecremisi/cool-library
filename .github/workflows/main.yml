@@ -15,7 +15,9 @@ jobs:
         brew install pipenv
         pipenv install
     - name: Update Migrations
+      working-directory: ./library
       run: |
-        pipenv run python3 ../library/manage.py makemigrations
-        pipenv run python3 ../library/manage.py migrate
+        ls
+        pipenv run python3 manage.py makemigrations
+        pipenv run python3 manage.py migrate
         
