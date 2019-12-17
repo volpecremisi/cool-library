@@ -18,7 +18,4 @@ jobs:
       run: |
         pipenv run python3 manage.py makemigrations
         pipenv run python3 manage.py migrate
-    - name: Test with Django tests
-      run: |
-        pipenv run python3 manage.py test polls
         
