@@ -19,4 +19,6 @@ jobs:
         ls
         pipenv run python3 manage.py makemigrations
         pipenv run python3 manage.py migrate
-    - uses: ./.github/actions/test        
+    - name: Test
+      run: |
+        pipenv run python3 manage.py test         
