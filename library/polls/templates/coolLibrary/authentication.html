@@ -1,3 +1,7 @@
+{% if error_message %}
+    <p style="color: crimson;"><strong>{{ error_message }}</strong></p>
+{% endif %}
+
 <h4>Please, login to loan a book in the Cool Library</h4><br>
 <form action= "{% url 'coolLibrary:loginUser' %}" method="post">
     {% csrf_token %}
@@ -15,3 +19,7 @@
 <br>
 <h4>Not registered yet?</h4>
 <a href="{% url 'coolLibrary:register' %}"> Register now! </a>
+<br>
+<hr>
+<br>
+<a href="{% url 'coolLibrary:index' %}">Home</a>

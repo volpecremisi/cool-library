@@ -1,23 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
 
 class Book(models.Model):
     title = models.CharField(max_length=500)
     author = models.CharField(max_length=400)
+    quantity = models.IntegerField(default=1)
+
+    class Meta:
+        unique_together = (("title","author"),)
 
     def __str__(self):
-        return " written by ".join([self.title,self.author])
-
-    def __eq__(self, other):
-        return self.title == other.title and self.author == other.author
+        return f"{self.title} written by {self.author}"
 
 
 class Loan(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     person = models.ForeignKey(User, on_delete=models.CASCADE)
     date_of_loan = models.DateTimeField('Date of Loan')
+
+    class Meta:
+        unique_together = (("book","person"),)
 
     def __str__(self):
         message = "\n is on loan to ".join([str(self.book),str(self.person)])

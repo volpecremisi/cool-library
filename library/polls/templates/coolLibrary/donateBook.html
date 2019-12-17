@@ -1,0 +1,13 @@
+<h2>Thank's for your donation!</h2><br>
+<h4>Please, insert Book's title and author:</h4>
+<form action= "{% url 'coolLibrary:insertBookInLibrary' %}" method="post">
+    {% csrf_token %}
+    <p>
+    <LABEL for="title">Title: </LABEL>
+            <INPUT type="text" id="title" name="title"><BR>
+    <LABEL for="author">Author: </LABEL>
+              <INPUT type="text" id="author" name="author"><BR>
+    <br><br>
+    <INPUT type="submit" value="Donate!"> <INPUT type="reset">
+    </p>
+</form>

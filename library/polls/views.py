@@ -2,9 +2,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.utils import timezone
 from django.urls import reverse
+from django.db.utils import IntegrityError
 
 from .models import Book, Loan
 
@@ -34,6 +35,22 @@ class AuthenticationView(generic.TemplateView):
 class RegisterView(generic.TemplateView):
     template_name = 'coolLibrary/register.html'
 
+class DonateBookView(generic.TemplateView):
+    template_name = 'coolLibrary/donateBook.html'
+
+def insertBookInLibrary(request):
+    book_title = request.POST['title']
+    book_author = request.POST['author']
+    try:
+        book_in_library = Book.objects.get(title=book_title, author=book_author)
+        book_in_library.quantity += 1
+        book_in_library.save()
+    except (KeyError, Book.DoesNotExist) as dne:
+        book_to_insert = Book(title=book_title,author=book_author)
+        book_to_insert.save()
+    finally:
+        return HttpResponseRedirect(reverse('coolLibrary:index'))
+
 def checkLogin(request, book_id):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('coolLibrary:selection', args=(book_id,)))
@@ -43,9 +60,10 @@ def loginUser(request):
     user_username = request.POST['username']
     user_psw = request.POST['psw']
     user_auth = authenticate(request, username=user_username, password=user_psw)
-    print(user_auth)
     if user_auth is None:
-        return HttpResponseRedirect(reverse('coolLibrary:register'))
+        return render(request, 'coolLibrary/authentication.html', {
+            'error_message': "Username or Password incorrect. Please retry.",
+        })
     login(request=request, user=user_auth)
     return HttpResponseRedirect(reverse('coolLibrary:index'))
 
@@ -63,8 +81,18 @@ def addNewUser(request):
     user_last_name = request.POST['last_name']
     user_password = request.POST['psw']
     user_mail = request.POST['mail']
-    user = User.objects.create_user(username=user_username, email=user_mail, password=user_password)
-    user.last_name = user_last_name
-    user.first_name = user_first_name
-    user.save()
-    return HttpResponseRedirect(reverse('coolLibrary:authentication'))
+    try:
+        user = User.objects.create_user(username=user_username, email=user_mail, password=user_password)
+        user.last_name = user_last_name
+        user.first_name = user_first_name
+        user.save()
+        return HttpResponseRedirect(reverse('coolLibrary:authentication'))
+    except IntegrityError as ie:
+        return render(request, 'coolLibrary/register.html', {
+            'error_message': "This username is already catched! Try something else please.",
+        })
+
+
+def logoutUser(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('coolLibrary:index'))

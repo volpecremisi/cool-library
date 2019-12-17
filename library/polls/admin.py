@@ -9,8 +9,9 @@ class BookAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Title',  {'fields': ['title']}),
         ('Author', {'fields': ['author']}),
+        ('Quantity', {'fields': ['quantity']}),
     ]
-    list_display = ['title','author']
+    list_display = ['title','author','quantity']
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(Loan)
