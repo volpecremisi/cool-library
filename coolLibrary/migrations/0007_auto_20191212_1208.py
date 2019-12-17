@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0006_auto_20191212_1207'),
+        ('coolLibrary', '0006_auto_20191212_1207'),
     ]
 
     operations = [

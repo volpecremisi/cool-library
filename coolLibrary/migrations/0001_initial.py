@@ -34,8 +34,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date_of_loan', models.DateTimeField(verbose_name='Date of Loan')),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.Book')),
-                ('person', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.Person')),
+                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='coolLibrary.Book')),
+                ('person', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='coolLibrary.Person')),
             ],
         ),
         migrations.CreateModel(
@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity_available', models.IntegerField(default=1)),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.Book')),
+                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='coolLibrary.Book')),
             ],
         ),
     ]

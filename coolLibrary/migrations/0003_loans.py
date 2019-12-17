@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('polls', '0002_auto_20191211_1133'),
+        ('coolLibrary', '0002_auto_20191211_1133'),
     ]
 
     operations = [
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date_of_loan', models.DateTimeField(verbose_name='Date of Loan')),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.Book')),
+                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='coolLibrary.Book')),
                 ('person', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

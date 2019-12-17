@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('polls', '0007_auto_20191212_1208'),
+        ('coolLibrary', '0007_auto_20191212_1208'),
     ]
 
     operations = [
