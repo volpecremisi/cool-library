@@ -14,12 +14,11 @@ jobs:
         python3 -m pip install --upgrade pip
         brew install pipenv
         pipenv install
-        pipenv shell
     - name: Update Migrations
       run: |
-        python3 manage.py makemigrations
-        python3 manage.py migrate
+        pipenv run python3 manage.py makemigrations
+        pipenv run python3 manage.py migrate
     - name: Test with Django tests
       run: |
-        python3 manage.py test polls
+        pipenv run python3 manage.py test polls
         
