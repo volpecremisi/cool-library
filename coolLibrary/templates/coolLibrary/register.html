@@ -1,0 +1,23 @@
+{% if error_message %}
+    <p style="color: crimson;"><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<h4>Insert your datas and join our amazing Cool Library!</h4>
+<form action= "{% url 'coolLibrary:addNewUser' %}" method="post">
+    {% csrf_token %}
+    <p>
+    <LABEL for="username">Username: </LABEL>
+              <INPUT type="text" id="username" name="username"><BR>
+    <LABEL for="first_name">First name: </LABEL>
+              <INPUT type="text" id="first_name" name="first_name"><BR>
+    <LABEL for="last_name">Last name: </LABEL>
+              <INPUT type="text" id="last_name" name="last_name"><BR>
+    <LABEL for="psw">password: </LABEL>
+              <INPUT type="text" id="psw" name="psw"><BR>
+    <LABEL for="mail">email: </LABEL>
+              <INPUT type="text" id="mail" name="mail"><BR>
+    <br><br>
+    <INPUT type="submit" value="Subscribe!"> <INPUT type="reset">
+    </p>
+</form>
+<a href="{% url 'coolLibrary:index' %}">Home</a>

@@ -1,0 +1,22 @@
+<h1>The Cool Library</h1>
+{% if user.is_authenticated %}
+    <p>Benvenuto {{ user }}!</p>
+{% endif %}
+
+{% if book_lists %}
+    <ul>
+    {% for book in book_lists %}
+        <li><a href="{% url 'coolLibrary:checkLogin' book.id %}">{{ book.title }} : {{ book.author }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+<hr><br>
+<h3><a href="{% url 'coolLibrary:donateBook' %}">Why don't donate a book?</a></h3>
+<hr><br>
+{% if user.is_authenticated %}
+    <a href="{% url 'coolLibrary:logoutUser' %}">Logout</a>
+{% else %}
+    <a href="{% url 'coolLibrary:authentication' %}">Login</a>
+{% endif %}
