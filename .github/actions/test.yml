@@ -1,0 +1,7 @@
+name: Test
+
+jobs:
+  steps:
+  - name:
+    run: |
+    pipenv run python3 manage.py test
