@@ -1,0 +1,24 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Requirements
+      working-directory: ./library
+      run: |
+        python3 -m pip install --upgrade pip
+        brew install pipenv
+        pipenv install
+    - name: Update Migrations
+      working-directory: ./library
+      run: |
+        ls
+        pipenv run python3 manage.py makemigrations
+        pipenv run python3 manage.py migrate
+        
