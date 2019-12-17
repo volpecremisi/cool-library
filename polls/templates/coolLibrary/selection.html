@@ -1,7 +1,0 @@
-
-    <h4>You want to loan: </h4>
-    <h3>{{ book.title }} , {{ book.author }}</h3>
-    <br><hr>
-    <h5>Confirm?</h5>
-    <a href= "{% url 'coolLibrary:manageLoans' book.id %}">'Yes I want it!'</a>
-    <a href= "{% url 'coolLibrary:index' %}">'No, I changed my mind.'</a>
