@@ -10,6 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Install Requirements
+      working-directory: ./library
       run: |
         python3 -m pip install --upgrade pip
         brew install pipenv
