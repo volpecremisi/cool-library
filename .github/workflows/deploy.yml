@@ -1,9 +1,6 @@
 name: DEPLOY
 
-on:
-  push:
-    tags:
-      - '*'
+on: [create]
 
 jobs:
   build:
