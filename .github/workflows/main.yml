@@ -21,4 +21,4 @@ jobs:
         pipenv run python3 manage.py migrate
     - name: Test
       run: |
-        pipenv run python3 manage.py test         
+        pipenv run python3 manage.py test     
