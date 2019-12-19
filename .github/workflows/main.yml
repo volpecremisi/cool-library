@@ -11,9 +11,8 @@ jobs:
     - name: Install Requirements
       run: |
         export PATH="${HOME}/.local/bin:$PATH"
-        sudo apt install python3-pip
-        python3.7 -m pip install --user pip
-        python3.7 -m pip install --user pipenv
+        python3 -m pip install --user pip
+        python3 -m pip install --user pipenv
         pipenv install
     - name: Update Migrations
       run: |
