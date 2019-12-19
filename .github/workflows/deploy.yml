@@ -3,7 +3,7 @@ name: DEPLOY
 on:
   push:
     tags:
-    - '*'
+      - '*'
 
 jobs:
   build:
