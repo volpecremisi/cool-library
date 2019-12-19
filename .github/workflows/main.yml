@@ -1,6 +1,9 @@
 name: CI
 
-on: push
+on: 
+  push:
+    tags-ignore:
+      - v1.*
 
 jobs:
   build:
@@ -10,8 +13,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install Requirements
       run: |
-        echo 'export PATH="${HOME}/.local/bin:$PATH"' >> ~/.bashrc
+        export PATH="${HOME}/.local/bin:$PATH"
         sudo apt install python3-pip
+        python3 -m pip install --user pip
         python3 -m pip install --user pipenv
         pipenv install
     - name: Update Migrations
