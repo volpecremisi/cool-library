@@ -1,9 +1,6 @@
 name: CI
 
-on: 
-  push:
-    tags-ignore:
-      - v1.*
+on: [push]
 
 jobs:
   build:
