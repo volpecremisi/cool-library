@@ -1,22 +1,19 @@
 name: CI
 
-on: [push]
+on: push
 
 jobs:
   build:
-
-    runs-on: macos-latest
+    runs-on: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v1
     - name: Install Requirements
       run: |
-        python3 -m pip install --upgrade pip
-        brew install pipenv
+        pip install pipenv
         pipenv install
     - name: Update Migrations
       run: |
-        ls
         pipenv run python3 manage.py makemigrations
         pipenv run python3 manage.py migrate
     - name: Test
