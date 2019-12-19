@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install Requirements
       run: |
-        pip install pipenv
+        sudo -H pip install -U pipenv
         pipenv install
     - name: Update Migrations
       run: |
