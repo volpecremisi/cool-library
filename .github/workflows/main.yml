@@ -21,4 +21,10 @@ jobs:
         pipenv run python3 manage.py migrate
     - name: Test
       run: |
-        pipenv run python3 manage.py test         
+        pipenv run python3 manage.py test     
+    - name: Deploy-on-Heroku
+      env:
+        HEROKU_API_TOKEN: '68e3a992-cbb0-47fb-bb40-6d314632478c'
+        HEROKU_APP_NAME: 'thecoolibrary'
+      if: github.ref == 'refs/heads/master' && job.status == 'success'
+      run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/master:master
