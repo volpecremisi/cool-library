@@ -1,7 +1,8 @@
 name: Deploy
 
 on:
-  create
+  release:
+    types: [published]
 
 jobs:
   build:
