@@ -4,18 +4,15 @@ on: push
 
 jobs:
   build:
-    runs-on: [ubuntu-latest]
+    runs-on: [ubuntu-18.04]
 
     steps:
     - uses: actions/checkout@v1
     - name: Install Requirements
       run: |
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-        test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-        test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-        test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
-        echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
-        brew install pipenv
+        echo 'export PATH="${HOME}/.local/bin:$PATH"' >> ~/.bashrc
+        sudo apt install python3-pip
+        python3 -m pip install --user pipenv
         pipenv install
     - name: Update Migrations
       run: |
