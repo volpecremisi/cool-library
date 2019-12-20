@@ -1,10 +1,11 @@
 name: DEPLOY
+
 on: [create]
+
 jobs:
   build:
     runs-on: [macos-latest]
     steps:
-      - name: Setting Checkout Version
       - uses: actions/checkout@v1
         
       - name: Deploy to Heroku
