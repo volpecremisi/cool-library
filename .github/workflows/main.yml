@@ -2,8 +2,8 @@ name: CI
 
 on:
   push:
-    tags-ignore: 
-      - v1.*
+    branches-ignore: 
+      - refs/tags/*
 
 jobs:
   build:
