@@ -3,7 +3,7 @@ name: DEPLOY
 on:
   push:
     branches: 
-      - refs/tags/*
+      - 'refs/tags/*'
 
 jobs:
   build:
