@@ -12,8 +12,6 @@ jobs:
         env:
           HEROKU_API_TOKEN: "8ff7e08-49a6-4e3c-a3db-29874dfe06fc"
           HEROKU_APP_NAME: "thecoolibrary"
-          FIRST_IF: github.ref == 'refs/heads/master'
-          SECOND_IF: job.status == 'success'
         #if: github.ref == 'refs/heads/master' && job.status == 'success'
         #run: git push https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git origin/master:master
-        run: echo 'result = ${FIRST_IF} , ${SECOND_IF}'
+        run: echo 'result = $((github.ref == 'refs/heads/master')) , $((job.status == 'success'))'
