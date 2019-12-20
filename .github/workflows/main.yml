@@ -2,8 +2,11 @@ name: CI
 
 on:
   push:
+    paths-ignore: 
+    - '**.yml'
     branches-ignore: 
       - refs/tags/*
+
 
 jobs:
   build:
