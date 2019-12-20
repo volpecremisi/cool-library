@@ -1,10 +1,9 @@
+name: DEPLOY
+
 on:
   push: 
     branches: 
       - refs/tags/*
-  
-  
-name: DEPLOY
 
 jobs:
   build:
