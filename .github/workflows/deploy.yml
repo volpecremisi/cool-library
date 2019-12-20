@@ -1,5 +1,6 @@
-name: DEPLOYUPDATE
+name: DEPLOY
 
+# in case of crash use:    on: [create]
 on:
   push:
     tags:
