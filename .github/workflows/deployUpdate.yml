@@ -1,9 +1,9 @@
 name: DEPLOYUPDATE
 
 on:
-  push: 
-    branches: 
-      - refs/tags/*
+  push:
+    tags:
+    - '*'
   
 jobs:
   build:
