@@ -1,12 +1,12 @@
+name: DEPLOY
+
 on:
   push: 
     branches: 
-    - refs/tags/*
-
-name: DEPLOY
+      - 'refs/tags/*'
 
 jobs:
-  build:
+   build:
     runs-on: [macos-latest]
 
     steps:
