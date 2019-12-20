@@ -4,13 +4,13 @@ on: [push]
 
 jobs:
   build:
-    runs-on: [ubuntu-16.04]
+    runs-on: [macos-latest]
 
     steps:
     - uses: actions/checkout@v1
     - name: Install Requirements
       run: |
-        sudo -H pip install -U pipenv
+        pip install pipenv
         pipenv install
     - name: Update Migrations
       run: |
