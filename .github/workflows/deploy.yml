@@ -2,8 +2,8 @@ name: DEPLOY
 
 on:
   push:
-    branches: 
-      - refs/tags/**
+    tags: 
+      - '*'
 
 jobs:
   build:
