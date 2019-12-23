@@ -17,14 +17,22 @@ class Book(models.Model):
 class Loan(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     person = models.ForeignKey(User, on_delete=models.CASCADE)
-    date_of_loan = models.DateTimeField('Date of Loan')
 
     class Meta:
         unique_together = (("book","person"),)
 
     def __str__(self):
         message = "\n is on loan to ".join([str(self.book),str(self.person)])
-        return "\n from: ".join([message,str(self.date_of_loan)])
+        return message
 
     def __eq__(self, other):
         return self.book == other.book and self.person == other.person
+
+
+class Date(models.Model):
+    loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
+    date_of_loan = models.DateTimeField('Date of Loan')
+    loan_date_expire = models.DateTimeField('Loan End Date')
+
+    def __str__(self):
+        return f"The loan '{self.loan}' is from {self.date_of_loan} to {self.loan_date_expire}"

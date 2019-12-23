@@ -4,10 +4,11 @@ from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.utils import timezone
+from datetime import timedelta
 from django.urls import reverse
 from django.db.utils import IntegrityError
 
-from .models import Book, Loan
+from .models import Book, Loan, Date
 
 # Create your views here.
 
@@ -72,9 +73,12 @@ def manageLoans(request, book_id):
     book_to_loan.quantity = book_to_loan.quantity-1
     book_to_loan.save()
     user = request.user
-    date = timezone.now()
-    newLoans = Loan(book = book_to_loan, person = user, date_of_loan = date)
+    date_loan_begin = timezone.now()
+    date_loan_end = date_loan_begin + timedelta(days=30)
+    newLoans = Loan(book = book_to_loan, person = user)
     newLoans.save()
+    dates = Date(loan=newLoans, date_of_loan=date_loan_begin, loan_date_expire=date_loan_end)
+    dates.save()
     return HttpResponseRedirect(reverse('coolLibrary:index'))
 
 def addNewUser(request):
