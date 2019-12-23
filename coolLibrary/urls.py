@@ -8,6 +8,7 @@ urlpatterns = [
     path('<int:pk>/', views.SelectionView.as_view(), name='selection'),
     path('authentication', views.AuthenticationView.as_view(), name='authentication'),
     path('register/', views.RegisterView.as_view(), name='register'),
+    path('showLoans', views.ShowUserLoanedBooksView.as_view(), name='showLoans'),
     path('donateBook/', views.DonateBookView.as_view(), name='donateBook'),
     path('<int:book_id>/checkLogin/', views.checkLogin, name='checkLogin'),
     path('loginUser/', views.loginUser, name='loginUser'),

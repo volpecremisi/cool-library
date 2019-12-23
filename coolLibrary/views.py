@@ -39,6 +39,18 @@ class RegisterView(generic.TemplateView):
 class DonateBookView(generic.TemplateView):
     template_name = 'coolLibrary/donateBook.html'
 
+class ShowUserLoanedBooksView(generic.ListView):
+    template_name = 'coolLibrary/showLoans.html'
+    context_object_name = 'book_lists'
+
+    def get_queryset(self):
+        """
+        Return the books loaned by a logged user
+        """
+        username = self.user_username
+        books_query_set = Loan.object.filter(username=username).values_list('book', flat=True)
+        return list(books_query_set)
+
 def insertBookInLibrary(request):
     book_title = request.POST['title']
     book_author = request.POST['author']

@@ -1,0 +1,13 @@
+<h1>The books you borrowed</h1>
+
+{% if book_lists %}
+    <ul>
+    {% for book in book_lists %}
+        <li>{{ book.title }} : {{ book.author }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You have not borrow a book yet. Come On!</p>
+{% endif %}
+
+<p><a href="{% url 'coolLibrary:index' %}">Go Back</a></p>
