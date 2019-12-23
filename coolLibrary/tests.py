@@ -29,6 +29,26 @@ class DonateBookViewTest(TestCase):
         self.assertEqual(book.quantity , 2)
 
 
+class ManageLoanBookViewTest(TestCase):
+
+    def test_loan_a_book_decrease_his_quantity(self):
+        client = Client()
+        user = User.objects.create_user(username='testuser', email='test@mail.it', password='test')
+        book = Book(title='test book', author='test author')
+        book.save()
+        user.save()
+        book_id = Book.objects.get(title='test book', author='test author').id
+        response = client.login(username='testuser', password='test')
+
+        if response:
+            client.post(f'/coolLibrary/{book_id}/manageLoans/', {})
+            book = Book.objects.get(title='test book', author='test author')
+            self.assertEqual(book.quantity, 0)
+        else:
+            print('Login Fallito')
+            self.assertFalse()
+
+
 class LoanModelTest(TestCase):
 
     def test_loan_same_book_to_same_person_generate_integrity_error(self):
@@ -44,6 +64,9 @@ class LoanModelTest(TestCase):
             date = timezone.now()
             newLoans = Loan(book = book, person = user, date_of_loan = date)
             newLoans.save()
+
+
+
 
 
 class UserRegistrationTest(TestCase):
@@ -73,8 +96,3 @@ class UserRegistrationTest(TestCase):
         self.assertContains(response,'This username is already catched! Try something else please.')
 
 
-'''
-class LoginTest(TestCase):
-
-    def test_wrong_login_credential_generate_error_message(self):
-'''

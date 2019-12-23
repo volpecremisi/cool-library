@@ -69,6 +69,8 @@ def loginUser(request):
 
 def manageLoans(request, book_id):
     book_to_loan = get_object_or_404(Book, pk= book_id)
+    book_to_loan.quantity = book_to_loan.quantity-1
+    book_to_loan.save()
     user = request.user
     date = timezone.now()
     newLoans = Loan(book = book_to_loan, person = user, date_of_loan = date)
