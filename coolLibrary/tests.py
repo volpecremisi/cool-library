@@ -17,6 +17,33 @@ class BookModelTest(TestCase):
         with self.assertRaises(IntegrityError):
             same_book.save()
 
+class LoanModelTest(TestCase):
+
+    def test_loan_same_book_to_same_person_generate_integrity_error(self):
+        book = Book(title='test book', author='test author')
+        user = User(username='testuser', email='test@mail.it', password='test')
+        date = timezone.now()
+        book.save()
+        user.save()
+        newLoans = Loan(book = book, person = user, date_of_loan = date)
+        newLoans.save()
+
+        with self.assertRaises(IntegrityError):
+            date = timezone.now()
+            newLoans = Loan(book = book, person = user, date_of_loan = date)
+            newLoans.save()
+
+
+class IndexViewTest(TestCase):
+
+    def test_index_shows_only_avaible_books(self):
+        client = Client()
+        book = Book(title='test book', author='test author', quantity=0)
+        book.save()
+
+        response = client.get('/coolLibrary/')
+        self.assertNotContains(response,'test book : test author')
+
 
 class DonateBookViewTest(TestCase):
 
@@ -47,27 +74,7 @@ class ManageLoanBookViewTest(TestCase):
         else:
             print('Login Fallito')
             self.assertFalse()
-
-
-class LoanModelTest(TestCase):
-
-    def test_loan_same_book_to_same_person_generate_integrity_error(self):
-        book = Book(title='test book', author='test author')
-        user = User(username='testuser', email='test@mail.it', password='test')
-        date = timezone.now()
-        book.save()
-        user.save()
-        newLoans = Loan(book = book, person = user, date_of_loan = date)
-        newLoans.save()
-
-        with self.assertRaises(IntegrityError):
-            date = timezone.now()
-            newLoans = Loan(book = book, person = user, date_of_loan = date)
-            newLoans.save()
-
-
-
-
+            
 
 class UserRegistrationTest(TestCase):
 

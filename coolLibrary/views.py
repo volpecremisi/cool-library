@@ -17,9 +17,9 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """
-        Return the last ten Books insered or updated in the library
+        Return the last ten Books insered or updated in the library with quantity > 0
         """
-        topTenBooks = Book.objects.all()
+        topTenBooks = Book.objects.all().exclude(quantity=0)
         topTenBooks = list(topTenBooks)
         topTenBooks.reverse()
         return topTenBooks[:10]
