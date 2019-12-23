@@ -47,9 +47,11 @@ class ShowUserLoanedBooksView(generic.ListView):
         """
         Return the books loaned by a logged user
         """
-        username = self.user_username
-        books_query_set = Loan.object.filter(username=username).values_list('book', flat=True)
-        return list(books_query_set)
+        user = self.request.user
+        print(user)
+        books_query_set = Loan.objects.filter(person=user).values_list('book', flat=True)
+        books_query_set = Book.objects.filter(pk__in=books_query_set)
+        return books_query_set
 
 def insertBookInLibrary(request):
     book_title = request.POST['title']
